@@ -54,14 +54,25 @@ public class EJ04 {
         String minusculas = "abcdefghijklmnopqrstuvwxyz";
         String numeros = "0123456789";
         String especiales = "!@#$%^&*";
-        String mayusculas = minusculas.toUpperCase();
+        String mayusculas = minusculas.toUpperCase(); //Como ya tenemos las minusculas, pasamos las mayusculas tirando de funcion
         int indice; //Indice para agregar un caracter de la listra de caracteres que se pueden elegir.
 
-        //Construimos los caracteres usados para la contraseña. Obligatorio minusculas y por cada criterio opcional añadira mas caracteres.
-        StringBuilder pool = new StringBuilder(minusculas);
-        if (incluirNumeros) pool.append(numeros);
-        if (incluirMayusculas) pool.append(mayusculas);
-        if (incluirEspeciales) pool.append(especiales);
+        //Construimos los caracteres usados para la contraseña. 
+        //Obligatorio minusculas, y por cada criterio opcional añadira mas caracteres.
+        //StringBuilder pool = new StringBuilder(minusculas);
+        String pool = minusculas;
+        if (incluirNumeros) {
+        	//pool.append(numeros);
+        	pool = pool + numeros;
+        }
+        if (incluirMayusculas) {
+        	//pool.append(mayusculas);
+        	pool = pool + mayusculas;
+        }
+        if (incluirEspeciales) {
+        	//pool.append(especiales);
+        	pool = pool + especiales;
+        }
         
         //Crear una instancia de Random para generar números aleatorios
         Random random = new Random();

@@ -14,34 +14,48 @@ public class EJ02 {
         String adjetivos = "hermoso,tranquilo,rápido,misterioso,alegre";
 
         Random random = new Random();
-
-        for (int i = 0; i < 3; i++) { //Tres líneas de poema
-            String sustantivo = obtenerPalabra(sustantivos, random.nextInt(5));
-            String verbo = obtenerPalabra(verbos, random.nextInt(5));
-            String adjetivo = obtenerPalabra(adjetivos, random.nextInt(5));
-            System.out.println(sustantivo + " " + verbo + " " + adjetivo + ".");
+        
+        //Tres líneas de poema
+        for (int i = 0; i < 3; i++) { 
+        	int r1 = random.nextInt(5);
+        	int r2 = random.nextInt(5);
+        	int r3 = random.nextInt(5);
+        	
+            String sustantivo = obtenerPalabra(sustantivos, r1);
+            String verbo = obtenerPalabra(verbos, r2);
+            String adjetivo = obtenerPalabra(adjetivos, r3);
+            
+            System.out.println(r1 + " - " + r2 + " - " + r3 + ".");
+            System.out.println(sustantivo + " " + verbo + " " + adjetivo);
         }
     }
 
-    //Método para obtener una palabra en la posición indicada
+
     public static String obtenerPalabra(String palabras, int indice) {
         int inicio = 0;
         int actual = 0;
         int contador = 0;
 
+        //Mientras no hayamos localizado la palabra de la posición que decimos en el indice
         while (contador < indice) {
+        	//Buscamos la coma, para quedarnos con la posicion de esa coma que es donde comienza una palabra
             if (palabras.charAt(actual) == ',') {
                 contador++;
                 inicio = actual + 1;
             }
             actual++;
+            //Por ejemplo: para la palabra 3, tendra que hacer el bucle 3 veces y quedarnos con la posicion
+            //de la 3 coma, que es la posicion de comienzo de la tercera palabra
         }
 
         int fin = inicio;
+        //Mientras NO haya terminado de leerse la cadena de palabra, o lo que se lea NO sea una coma
+        //vamos recorriendo caracter a caracter la cadena, hasta encontrar donde termina
         while (fin < palabras.length() && palabras.charAt(fin) != ',') {
             fin++;
         }
-
-        return palabras.substring(inicio, fin);
+        
+        //Devolvemos la palabra (tenemos la posicion de inicio, y luego la posicion de fin).
+        return palabras.substring(inicio,fin);
     }
 }

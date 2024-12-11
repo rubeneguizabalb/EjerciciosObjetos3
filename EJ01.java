@@ -32,27 +32,49 @@ public class EJ01 {
     }
 
     public static String codificarMensaje(String mensaje, int desplazamiento) {
-        StringBuilder codificado = new StringBuilder();
-        for (char c : mensaje.toCharArray()) {
-            if (Character.isLetter(c)) {
-                char base = Character.isUpperCase(c) ? 'A' : 'a';
+        //StringBuilder codificado = new StringBuilder();
+        String codificado = "";
+        //Recorremos la cadena del mensaje
+        for (int i = 0; i < mensaje.length(); i++) {
+            char c = mensaje.charAt(i);
+            //Para cada caracter, si es letra
+            if (Character.isLetter(c)) {            	
+            	char base;
+            	//Si es mayuscula, nos quedamos con el caracter base Mayuscula 
+                if (Character.isUpperCase(c)) {
+                    base = 'A';
+                } else {
+                    base = 'a';
+                }
+                //Lo que hace es al caracter restarle la base (esta restando posiciones ASCII) y luego le suma el desplazamiento
+                //que es sumar posiciones ASCII, de eso hacemos el resto entre 26 y luego le sumamos la base
                 c = (char) ((c - base + desplazamiento) % 26 + base);
-            }
-            codificado.append(c);
+            }            
+            //codificado.append(c);
+            codificado = codificado + c;
         }
         return codificado.toString();
     }
-    
+
     public static String decodificarMensaje(String mensajeCodificado, int desplazamiento) {
-        StringBuilder decodificado = new StringBuilder();
-        for (char c : mensajeCodificado.toCharArray()) {
+        //StringBuilder decodificado = new StringBuilder();
+    	String decodificado = "";
+        for (int i = 0; i < mensajeCodificado.length(); i++) {
+            char c = mensajeCodificado.charAt(i);           
             if (Character.isLetter(c)) {
                 char base = Character.isUpperCase(c) ? 'A' : 'a';
+                if (Character.isUpperCase(c)) {
+                    base = 'A';
+                } else {
+                    base = 'a';
+                }
+                //Lo que hace es al caracter restarle la base (esta restando posiciones ASCII) y luego le resta el desplazamiento
+                //que es restar posiciones ASCII, le suma 26, de eso hacemos el resto entre 26 y luego le sumamos la base
                 c = (char) ((c - base - desplazamiento + 26) % 26 + base);
             }
-            decodificado.append(c);
+            //decodificado.append(c);
+            decodificado = decodificado + c;
         }
         return decodificado.toString();
     }
-
 }

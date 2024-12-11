@@ -19,6 +19,7 @@ public class EJ03 {
         System.out.println("Elige la operación (+, -, *, /): ");
         char operacion = scanner.next().charAt(0);
 
+        //Se realiza la operacion y se devuelve el resultado
         String resultado = operarFracciones(fraccion1, fraccion2, operacion);
         System.out.println("Resultado: " + resultado);
         
@@ -26,13 +27,15 @@ public class EJ03 {
     }
 
     public static String operarFracciones(String fraccion1, String fraccion2, char operacion) {
-    	// Buscar la posición del carácter '/' en las fracciones
+    	//Buscar la posición del carácter '/' en las fracciones
         int index1 = fraccion1.indexOf('/');
         int index2 = fraccion2.indexOf('/');
 
         //Extraer el numerador y denominador de la primera fracción
         int num1 = Integer.parseInt(fraccion1.substring(0, index1));
-        int den1 = Integer.parseInt(fraccion1.substring(index1 + 1));
+        //En esta segunda se puede poner la length o dejar solo con index + 1, que entonces
+        //la substring llegara hasta el final
+        int den1 = Integer.parseInt(fraccion1.substring(index1 + 1,fraccion1.length()));
 
         //Extraer el numerador y denominador de la segunda fracción
         int num2 = Integer.parseInt(fraccion2.substring(0, index2));
@@ -40,6 +43,7 @@ public class EJ03 {
 
         int numResultado = 0, denResultado = 1;
 
+        //Se hace la operación que se ha pasado a la función: +, -, *, /
         switch (operacion) {
             case '+':
                 numResultado = num1 * den2 + num2 * den1;
@@ -60,6 +64,8 @@ public class EJ03 {
         }
 
         //Calcular el maximo comun divisor
+        //Se hace el maximo comun divisor para poder realizar las operaciones y devolver las funciones de forma correcta
+        //Por ejemplo 1/2 + 1/4 = 3/4 --> 0.5 + 0.25 = 0.75
         int a, b, temp, mcd;
         
         a = numResultado;
